@@ -21,3 +21,46 @@ export async function getWhishlistItems() :Promise<WishlistResponse>{
         throw new Error("Authintication required")
     }
 }
+
+export async function addToWhishlist({productId}:{productId:string}){
+
+    
+  const token = await getToken()
+  if (token) {
+    try {
+      const options :AxiosRequestConfig= {
+        url: "https://ecommerce.routemisr.com/api/v1/wishlist",
+        method: "POST",
+        headers: { token },
+        data: {productId}
+      };
+
+      const { data } = await axios.request(options);
+      return data;
+    } catch (error) {
+        throw error
+    }
+  } else {
+    throw new Error('Authintication required')
+  }
+}
+
+export async function removeFromWhishlist(id: string) :Promise<CartResponseType>{
+  const token = await getToken();
+  if (token) {
+    try {
+      const options: AxiosRequestConfig = {
+        url: `https://ecommerce.routemisr.com/api/v1/wishlist/${id}`,
+        method: "DELETE",
+        headers: { token },
+      };
+
+      const { data } = await axios.request(options);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  } else {
+    throw new Error("Authintication required");
+  }
+}

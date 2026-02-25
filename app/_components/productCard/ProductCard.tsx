@@ -4,14 +4,12 @@ import { Button } from "@/components/ui/button";
 import { product } from "@/types/product.type";
 import Link from "next/link";
 import Image from "next/image";
-import { addToCart } from "@/api/addToCart";
 import { toast } from "react-toastify";
-import { getCartItems } from "@/api/getCartItems";
+import { addToCart, getCartItems } from "@/api/getCartItems";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { setCartItems } from "@/store/slices/cart.slice";
-import { addToWhishlist } from "@/api/addToWhishlist";
 import { setWishlistItems } from "@/store/slices/whishlist.slice";
-import { getWhishlistItems } from "@/api/getWhishlist";
+import { addToWhishlist, getWhishlistItems } from "@/api/getWhishlist";
 import { useState } from "react";
 
 export default function ProductCard({ product }: { product: product }) {

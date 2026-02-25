@@ -5,14 +5,13 @@ import { WishlistItem } from "@/types/whishlist.type";
 import Link from "next/link";
 import Image from "next/image";
 import { product } from "@/types/product.type";
-import { addToCart } from "@/api/addToCart";
-import { getCartItems } from "@/api/getCartItems";
+import { addToCart, getCartItems } from "@/api/getCartItems";
 import { setCartItems } from "@/store/slices/cart.slice";
 import { useAppDispatch } from "@/store/store";
 import { toast } from "react-toastify";
-import { removeFromWhishlist } from "@/api/removeFromWhishlist";
 import Swal from "sweetalert2";
 import { removeItem } from "@/store/slices/whishlist.slice";
+import { removeFromWhishlist } from "@/api/getWhishlist";
 
 export default function WhishlistCard({ product }: { product: product }) {
   const dispatch = useAppDispatch();

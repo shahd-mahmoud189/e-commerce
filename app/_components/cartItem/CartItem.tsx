@@ -1,12 +1,11 @@
 "use client";
 import Image from "next/image";
 import { CartProductType } from "@/types/cartItem.type";
-import { removeFromCart } from "@/api/removeFromCart";
 import { toast } from "react-toastify";
 import { removeProduct, setCartItems } from "@/store/slices/cart.slice";
 import { useAppDispatch } from "@/store/store";
 import Swal from "sweetalert2";
-import { updateCart } from "@/api/updateCart";
+import { removeFromCart, updateCart } from "@/api/getCartItems";
 
 export default function CartItem({ product }: { product: CartProductType }) {
 
