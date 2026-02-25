@@ -1,8 +1,6 @@
 'use client'
-import { addToCart } from "@/api/addToCart";
-import { addToWhishlist } from "@/api/addToWhishlist";
-import { getCartItems } from "@/api/getCartItems";
-import { getWhishlistItems } from "@/api/getWhishlist";
+import { addToCart, getCartItems } from "@/api/getCartItems";
+import { addToWhishlist, getWhishlistItems } from "@/api/getWhishlist";
 import { Button } from "@/components/ui/button";
 import { setCartItems } from "@/store/slices/cart.slice";
 import { setWishlistItems } from "@/store/slices/whishlist.slice";
