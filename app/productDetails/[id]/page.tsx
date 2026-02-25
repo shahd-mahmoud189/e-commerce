@@ -1,4 +1,4 @@
-import { getProductDetails } from "@/api/productDetails.api";
+import { getProductDetails } from "@/api/products.api";
 import ProductDetailsCard from "@/app/_components/productDetailsCard/ProductDetailsCard";
 import { product } from "@/types/product.type";
 import React from "react";

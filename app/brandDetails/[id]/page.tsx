@@ -1,5 +1,4 @@
-import getBrandDetails from "@/api/getBrandDetails";
-import getCategoryDetails from "@/api/getCategoryDetails";
+import { getBrandDetails } from "@/api/getAllBrands";
 import ProductCard from "@/app/_components/productCard/ProductCard";
 import { product } from "@/types/product.type";
 

@@ -1,4 +1,4 @@
-import getCategoryDetails from "@/api/getCategoryDetails";
+import { getCategoryDetails } from "@/api/categories";
 import ProductCard from "@/app/_components/productCard/ProductCard";
 import { product } from "@/types/product.type";
 

@@ -22,3 +22,24 @@ export default async function cashOrder({shippingAddress,cartId}:{shippingAddres
     throw new Error("Authintication required");
   }
 }
+
+export async function onlineOrder({shippingAddress,cartId, url}:{shippingAddress:paymentForm, cartId:string, url:string}) {
+  const token = await getToken();
+  if (token) {
+    try {
+      const options: AxiosRequestConfig = {
+        url: `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartId}?url=${url}`,
+        method: "POST",
+        headers: { token },
+        data: { shippingAddress },
+      };
+
+      const { data } = await axios.request(options);
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  } else {
+    throw new Error("Authintication required");
+  }
+}
