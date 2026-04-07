@@ -6,13 +6,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { toast } from "react-toastify";
 import { addToCart, getCartItems } from "@/api/getCartItems";
-import { useAppDispatch, useAppSelector } from "@/store/store";
+import { AppState, useAppDispatch, useAppSelector } from "@/store/store";
 import { setCartItems } from "@/store/slices/cart.slice";
 import { setWishlistItems } from "@/store/slices/whishlist.slice";
 import { addToWhishlist, getWhishlistItems } from "@/api/getWhishlist";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 export default function ProductCard({ product }: { product: product }) {
+  const router = useRouter();
+  const { isAuthinticated } = useSelector(
+    (appState: AppState) => appState.auth,
+  );
   const { products, numberOfWhishlistItems } = useAppSelector(
     (state) => state.whishlist,
   );
@@ -22,35 +28,43 @@ export default function ProductCard({ product }: { product: product }) {
   const dispatch = useAppDispatch();
 
   const addItemToCart = async () => {
-    try {
-      const response = await addToCart({ productId: product.id });
-      console.log(response);
-      if (response.status === "success") {
-        toast.success(response.message);
-        const cartInfo = await getCartItems();
-        dispatch(setCartItems(cartInfo));
-      } else {
-        toast.error(response.message);
+    if (isAuthinticated) {
+      try {
+        const response = await addToCart({ productId: product.id });
+        console.log(response);
+        if (response.status === "success") {
+          toast.success(response.message);
+          const cartInfo = await getCartItems();
+          dispatch(setCartItems(cartInfo));
+        } else {
+          toast.error(response.message);
+        }
+      } catch (error: any) {
+        console.log(error.response);
+        console.log(product.id);
       }
-    } catch (error: any) {
-      console.log(error.response);
-      console.log(product.id);
+    } else {
+      router.push("/login");
     }
   };
 
   const addItemToWhishlist = async () => {
-    try {
-      const response = await addToWhishlist({ productId: product.id });
-      console.log(response);
-      if (response.status === "success") {
-        toast.success(response.message);
-        const whishlistInfo = await getWhishlistItems();
-        setIsInWhishlist(true);
-        dispatch(setWishlistItems(whishlistInfo));
+    if (isAuthinticated) {
+      try {
+        const response = await addToWhishlist({ productId: product.id });
+        console.log(response);
+        if (response.status === "success") {
+          toast.success(response.message);
+          const whishlistInfo = await getWhishlistItems();
+          setIsInWhishlist(true);
+          dispatch(setWishlistItems(whishlistInfo));
+        }
+        return true;
+      } catch (error: any) {
+        console.log(error.response);
       }
-      return true;
-    } catch (error: any) {
-      console.log(error.response);
+    } else {
+      router.push("/login");
     }
   };
 
